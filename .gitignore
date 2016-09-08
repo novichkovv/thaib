@@ -1,1 +1,5 @@
 .idea
+/www/.htaccess
+/www/config.php
+tmp
+uploads
