@@ -24,7 +24,7 @@
                         <div class="row ">
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <span class="help-block text-muted small-font" > Expiry Month</span>
-                                <input name="cc_month" type="text" class="form-control" data-require="1" placeholder="MM" />
+                                <input id="month_input" name="cc_month" type="text" class="form-control" data-require="1" placeholder="MM" />
                                 <div class="error-require validate-message">
                                     Required Field
                                 </div>
@@ -93,6 +93,8 @@
         $("body").on("submit", "#payment_form", function () {
            return validate('payment_form');
         });
+
+        $("#month_input").mask(99);
     });
 </script>
 <style>
