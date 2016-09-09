@@ -29,7 +29,7 @@ class index_controller extends controller
 //          ]
 //        }', true);
 //        $api->test($params);
-        $this->view('index' . DS . 'index');
+        $this->view_only('index' . DS . 'index');
     }
 
     public function index_na()

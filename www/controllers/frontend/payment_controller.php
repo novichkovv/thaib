@@ -9,7 +9,16 @@ class payment_controller extends controller
 {
     public function index()
     {
+        if(empty($_GET['order_id'])) {
+            header('Location: ' . SITE_DIR);
+            exit;
+        }
         if(isset($_POST['pay_btn'])) {
+            $order = $this->model('orders')->getOrder($_POST['order_id']);
+            if(!$order) {
+                throw new Exception('Incorrect Order');
+            }
+            $price = $this->getRate($order['price']);
             $params = [
                 'intent' => 'sale',
                 'payer' => [
@@ -31,22 +40,50 @@ class payment_controller extends controller
                 'transactions' => [
                     [
                         "amount" => [
-                            "total" => "7.47",
+                            "total" => $price,
                             "currency" => "USD",
                             "details" => [
-                                "subtotal" => "7.41",
-                                "tax" => "0.03",
-                                "shipping" => "0.03"
+                                "subtotal" => $price,
+                                "tax" => "0.00",
+                                "shipping" => "0.00"
                              ]
                         ],
-                        'description' => 1111
+                        'description' => $_POST['order_id']
                     ]
                 ]
             ];
             $api = new paypal_api_class();
-            $api->sendPaymentRequest($params);
+            $res = $api->sendPaymentRequest($params);
+            if($res['state'] == 'approved') {
+                header('Location: ' . SITE_DIR . 'payment/success/?order_id=' . $_POST['order_id']);
+                exit;
+            } else {
+                print_r($res);
+            }
+            exit;
         }
-        $this->view_only('payment' . DS . 'form');
+
+        $this->render('order_id', $_GET['order_id']);
+        $order = $this->model('orders')->getById($_GET['order_id']);
+        $this->render('order', $order);
+        $price = $this->getRate($order['price']);
+        $this->render('price', $price);
+        $this->view('payment' . DS . 'form');
+    }
+
+    private function getRate($price)
+    {
+        $current = json_decode(file_get_contents('https://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.xchange+where+pair+=+%22USDTHB%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=')
+            , true);
+        $rate = $current['query']['results']['rate']['Bid'];
+        if(!$rate) {
+            $rate = 30;
+        }
+        $price_usd = round($price/$rate, 2);
+        if(!$price_usd) {
+            throw new Exception('No USD');
+        }
+        return $price_usd;
     }
 
     public function index_na()
