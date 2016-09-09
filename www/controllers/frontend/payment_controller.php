@@ -9,6 +9,13 @@ class payment_controller extends controller
 {
     public function index()
     {
+        $payment_systems = [
+            2 => 'mir',
+            4 => 'visa',
+            3 => 'amex',
+            5 => 'mastercard' ,
+            6 => 'maesrto'
+        ];
         if(empty($_GET['order_id'])) {
             header('Location: ' . SITE_DIR);
             exit;
@@ -27,7 +34,7 @@ class payment_controller extends controller
                         [
                             'credit_card' => [
                                 'number' => $_POST['cc_number'],
-                                'type' => 'visa',
+                                'type' => $payment_systems[$_POST['cc_number'][0]],
                                 "expire_month" => $_POST['cc_month'],
                                 "expire_year" => '20' . $_POST['cc_year'],
                                 "cvv2" => $_POST['cc_cvv'],
@@ -75,13 +82,10 @@ class payment_controller extends controller
     {
         $current = json_decode(file_get_contents('https://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.xchange+where+pair+=+%22USDTHB%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=')
             , true);
-        print_r($current);
         $rate = $current['query']['results']['rate']['Bid'];
         if(!$rate) {
             $rate = 30;
         }
-        echo $rate;
-        echo $price;
         $price_usd = round($price/$rate, 2);
         if(!$price_usd) {
             throw new Exception('No USD');
