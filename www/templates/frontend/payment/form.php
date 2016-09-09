@@ -74,15 +74,19 @@
                             </div>
                         </div>
 
-<?php echo $price; ?>
+
                     </form>
                 </div>
             </div>
         </div>
+
         <!-- CREDIT CARD DIV END -->
     </div>
 
 </div><!-- /.container -->
+<div class="container text-center">
+    All transactions are committed in USD. You will be charged to USD <?php echo $price; ?>
+</div>
 <script type="text/javascript">
     $ = jQuery.noConflict();
     $(document).ready(function () {

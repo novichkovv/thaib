@@ -75,10 +75,13 @@ class payment_controller extends controller
     {
         $current = json_decode(file_get_contents('https://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.xchange+where+pair+=+%22USDTHB%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=')
             , true);
+        print_r($current);
         $rate = $current['query']['results']['rate']['Bid'];
         if(!$rate) {
             $rate = 30;
         }
+        echo $rate;
+        echo $price;
         $price_usd = round($price/$rate, 2);
         if(!$price_usd) {
             throw new Exception('No USD');
