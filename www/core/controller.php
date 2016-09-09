@@ -17,6 +17,7 @@ abstract class controller extends base
     protected $controller_name;
     protected $action_name;
     protected $sidebar;
+    protected $content;
     private $redirect;
     public  $check_auth;
     protected $scripts = [];
@@ -54,12 +55,9 @@ abstract class controller extends base
             header('Location: ' . SITE_DIR);
             exit;
         }
-        if(PROJECT == 'frontend' && $controller == 'common_controller') {
-            //$this->check_client_auth();
-        }
-        if($this->check_auth)
+        if($this->check_auth && PROJECT != 'frontend')
         {
-//            $this->sidebar();
+            $this->sidebar();
         }
         $this->init();
         $this->action_name = $action . ($this->check_auth ? '_na' : '');
@@ -116,10 +114,16 @@ abstract class controller extends base
 //        if($this->sidebar !== false && PROJECT == 'backend') {
 //            require_once(!$this->header ? TEMPLATE_DIR . 'common' . DS . 'sidebar.php' : TEMPLATE_DIR . 'common' . DS .$this->sidebar() . '.php');
 //        }
-        if($template_file !== false) {
-            require_once($template_file);
+        if($this->content !== false) {
+            require_once(!$this->content ? TEMPLATE_DIR . 'common' . DS . 'content.php' : TEMPLATE_DIR . 'common' . DS .$this->content . '.php');
         }
-        if($this->sidebar !== false && PROJECT == 'frontend') {
+
+        if($template_file !== false) {
+            $this->render('template', $template_file);
+        }
+
+        if($this->sidebar !== false) {
+            $this->render('sidebar', TEMPLATE_DIR . 'common' . DS . 'sidebar.php');
 //            require_once(!$this->header ? TEMPLATE_DIR . 'common' . DS . 'sidebar.php' : TEMPLATE_DIR . 'common' . DS .$this->sidebar() . '.php');
         }
 
@@ -170,44 +174,34 @@ abstract class controller extends base
      */
     protected function checkAuth()
     {
-        $this->user = $this->model('users')->getById(1);
-        registry::set('auth', true);
-        registry::set('user', $this->user);
-        if(!$this->user['feedly_id'] && $this->user['refresh_token']) {
-            $profile = $this->api()->getProfile();
-            $this->user['feedly_id'] = $profile['id'];
-            $this->model('users')->insert($this->user);
-            registry::remove('user');
-            registry::set('user', $this->user);
+        if($_SESSION['auth']) {
+            if($user = $this->model('system_users')->getByFields(array(
+                'id' => $_SESSION['user']['id'],
+                'email' => $_SESSION['user']['email'],
+                'user_password' => $_SESSION['user']['user_password']
+            ))
+            ) {
+                registry::set('auth', true);
+                registry::set('user', $user);
+                return true;
+            } else {
+                return false;
+            }
+        } elseif($_COOKIE['auth']) {
+            if($user = $this->model('system_users')->getByFields(array(
+                'id' => $_COOKIE['id'],
+                'email' => $_COOKIE['email'],
+                'user_password' => $_COOKIE['user_password']
+            ),0,'','',0)) {
+                registry::set('auth', true);
+                registry::set('user', $user);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-//        if($_SESSION['auth']) {
-//            if($user = $this->model('backend_users')->getByFields(array(
-//                'id' => $_SESSION['user']['id'],
-//                'email' => $_SESSION['user']['email'],
-//                'user_password' => $_SESSION['user']['user_password']
-//            ))
-//            ) {
-//                registry::set('auth', true);
-//                registry::set('user', $user);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        } elseif($_COOKIE['auth']) {
-//            if($user = $this->model('backend_users')->getByFields(array(
-//                'id' => $_COOKIE['id'],
-//                'email' => $_COOKIE['email'],
-//                'user_password' => $_COOKIE['user_password']
-//            ),0,'','',0)) {
-//                registry::set('auth', true);
-//                registry::set('user', $user);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        } else {
-//            return false;
-//        }
     }
 
     /**
@@ -220,7 +214,7 @@ abstract class controller extends base
     protected function auth($email, $password, $remember = false)
     {
         if(!$password) return false;
-        if($user = $this->model('backend_users')->getByFields(array(
+        if($user = $this->model('system_users')->getByFields(array(
             'email' => $email,
             'user_password' => $password
         ))) {
@@ -348,7 +342,7 @@ abstract class controller extends base
             $sidebar = false;
         }
         if(!$permit_page) {
-            $this->view('access_denied');
+            $this->view('common' . DS . 'access_denied');
             exit;
         }
         $this->render('sidebar', $sidebar);

@@ -1,14 +1,12 @@
-<form action="<?php echo SITE_DIR; ?>" method="post" id="logout_form">
-    <input type="hidden" name="log_out_btn" value="1">
-</form>
-</div>
-</div>
-</div>
+<!-- BEGIN FOOTER -->
 <div class="page-footer">
-    <div class="container">
-        <?php echo date('Y'); ?> &copy; 1nut.ru. Все права защищены.
+    <div class="page-footer-inner">
+        <?php echo date('Y'); ?> &copy;
+    </div>
+    <div class="page-footer-tools">
+        <span class="go-top">
+        <i class="fa fa-angle-up"></i>
+        </span>
     </div>
 </div>
-<div class="scroll-to-top">
-    <i class="icon-arrow-up"></i>
-</div>
+<!-- END FOOTER -->
