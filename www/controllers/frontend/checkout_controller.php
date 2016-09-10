@@ -9,7 +9,6 @@ class checkout_controller extends controller
 {
     public function index()
     {
-        echo 1;
         if(empty($_GET['product_id']) && empty($_GET['order_id'])) {
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit;
@@ -22,7 +21,6 @@ class checkout_controller extends controller
                 $product_id = $_GET['product_id'];
             }
             $product = $this->model('products')->getById($product_id);
-            print_r($product);exit;
             if(!$product || !$product['price']) {
                 throw new Exception('Bad Product Id');
             }
@@ -39,6 +37,11 @@ class checkout_controller extends controller
         $product['price_usd'] = $this->getRate($product['price']);
         $this->render('product', $product);
         $this->view('payment' . DS . $sequence . '1');
+    }
+
+    public function index_na()
+    {
+        $this->index();
     }
 
     private function getRate($price)
@@ -158,6 +161,11 @@ class checkout_controller extends controller
         exit;
     }
 
+    public function payment_na()
+    {
+        $this->payment();
+    }
+
     public function address()
     {
         if(isset($_POST['address_btn'])) {
@@ -189,8 +197,18 @@ class checkout_controller extends controller
         $this->view('payment' . DS . $product['checkout_sequence'] . '2');
     }
 
+    public function address_na()
+    {
+        $this->address();
+    }
+
     public function success()
     {
         $this->view('payment' . DS . 'success');
+    }
+
+    public function success_na()
+    {
+        $this->success();
     }
 }
