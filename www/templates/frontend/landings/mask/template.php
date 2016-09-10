@@ -39,11 +39,11 @@
 
 
 
-    <link rel="stylesheet" type="text/css" href="//static.best-gooods.ru/fonts/roboto.css">
-    <script src="http://api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
-    <script src="http://static.best-gooods.ru/js/jquery.js" type="text/javascript"></script>
-    <script src="http://static.best-gooods.ru/js/plugins.js" type="text/javascript"></script>
-    <script src="http://static.best-gooods.ru/js/detect.js" type="text/javascript"></script>
+<!--    <link rel="stylesheet" type="text/css" href="//static.best-gooods.ru/fonts/roboto.css">-->
+<!--    <script src="http://api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU" type="text/javascript"></script>-->
+<!--    <script src="http://static.best-gooods.ru/js/jquery.js" type="text/javascript"></script>-->
+<!--    <script src="http://static.best-gooods.ru/js/plugins.js" type="text/javascript"></script>-->
+<!--    <script src="http://static.best-gooods.ru/js/detect.js" type="text/javascript"></script>-->
 
     <script>
 

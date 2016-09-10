@@ -51,7 +51,7 @@ class index_controller extends controller
     {
         $product = $this->model('products')->getByField('product_key', registry::get('route_parts')[0]);
         $this->render('product', $product);
-        $this->render('dir', TEMPLATE_DIR . 'landings/' . $product['landing_key'] . '/');
+        $this->render('dir', SITE_DIR . 'templates/frontend/landings/' . $product['landing_key'] . '/');
         $this->view_only('landings' . DS . $product['landing_key'] . DS . 'template');
     }
 
