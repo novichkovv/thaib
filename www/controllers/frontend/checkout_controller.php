@@ -9,6 +9,7 @@ class checkout_controller extends controller
 {
     public function index()
     {
+        echo 1;
         if(empty($_GET['product_id']) && empty($_GET['order_id'])) {
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit;
