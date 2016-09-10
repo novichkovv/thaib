@@ -21,6 +21,7 @@ class checkout_controller extends controller
                 $product_id = $_GET['product_id'];
             }
             $product = $this->model('products')->getById($product_id);
+            print_r($product);exit;
             if(!$product || !$product['price']) {
                 throw new Exception('Bad Product Id');
             }
