@@ -46,4 +46,17 @@ class index_controller extends controller
     {
         $this->secure();
     }
+
+    public function show()
+    {
+        $product = $this->model('products')->getByField('product_key', registry::get('route_parts')[0]);
+        $this->render('product', $product);
+        $this->render('dir', TEMPLATE_DIR . 'landings/' . $product['landing_key'] . '/');
+        $this->view_only('landings' . DS . $product['landing_key'] . DS . 'template');
+    }
+
+    public function show_na()
+    {
+        $this->show();
+    }
 }

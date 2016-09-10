@@ -55,3 +55,12 @@ CREATE TABLE order_address_relations (
 
 ALTER TABLE products ADD price DECIMAL(10,2) NOT NULL AFTER product_name;
 ALTER TABLE orders ADD price_usd DECIMAL (10, 2) NULL AFTER price;
+
+ALTER TABLE products ADD checkout_sequence TINYINT NOT NULL DEFAULT 1;
+ALTER TABLE orders ADD payment_info VARCHAR (255) NULL AFTER payment_method;
+
+ALTER TABLE user_addresses ADD first_name VARCHAR (255) NULL AFTER user_id;
+ALTER TABLE user_addresses ADD last_name VARCHAR (255) NULL AFTER first_name;
+
+ALTER TABLE products ADD product_key VARCHAR (255) NOT NULL AFTER id;
+ALTER TABLE products ADD landing_key VARCHAR (255) NOT NULL AFTER product_key;

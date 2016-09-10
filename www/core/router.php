@@ -30,13 +30,13 @@ registry::set('route_parts', $route_parts);
 $class_name = $controller . '_controller';
 
 $common_controller = new common_controller('common_controller', 'index');
-//if(PROJECT == 'frontend') {
-//    $model = new default_model('frontend_routes');
-//    if($route = $model->getByField('url_key', $route_parts[0])) {
-//        $class_name = $route['controller'];
-//        $action = $route['method'];
-//    }
-//}
+if(PROJECT == 'frontend') {
+    $model = new default_model('products');
+    if($product = $model->getByField('product_key', $route_parts[0])) {
+        $class_name = 'index_controller';
+        $action = 'show';
+    }
+}
 
 if(!file_exists(CONTROLLER_DIR . $class_name . '.php')) {
     $class_name = 'default_controller';

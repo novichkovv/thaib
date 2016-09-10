@@ -33,7 +33,7 @@ class payment_controller extends controller
                     "funding_instruments" => [
                         [
                             'credit_card' => [
-                                'number' => $_POST['cc_number'],
+                                'number' => str_replace(' ', '', $_POST['cc_number']),
                                 'type' => $payment_systems[$_POST['cc_number'][0]],
                                 "expire_month" => $_POST['cc_month'],
                                 "expire_year" => '20' . $_POST['cc_year'],
@@ -65,6 +65,9 @@ class payment_controller extends controller
                 header('Location: ' . SITE_DIR . 'payment/success/?order_id=' . $_POST['order_id']);
                 exit;
             } else {
+                if($res['name'] = 'VALIDATION_ERROR') {
+                    $this->
+                }
                 print_r($res);
             }
             exit;
