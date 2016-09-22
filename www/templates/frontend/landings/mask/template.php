@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Black Mask - Поможет очистить Вашу кожу от надоедливых черных точек и прыщей!</title>
+    <title>Black Mask</title>
     <meta name="description" content="Black Mask - Поможет очистить Вашу кожу от надоедливых черных точек и прыщей!" />
     <meta name="keywords" content="Black Mask, маска Black Mask, Black Mask цена, Black Mask отзывы, Black Mask купить в интернет магазине" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,24 +17,22 @@
     <script type="text/javascript" src="<?php echo SITE_DIR; ?>js/init.js"></script>
     <script src="<?php echo SITE_DIR; ?>js/count.js"></script>
 
-
-    <script>(function() {
-            var _fbq = window._fbq || (window._fbq = []);
-            if (!_fbq.loaded) {
-                var fbds = document.createElement('script');
-                fbds.async = true;
-                fbds.src = '//connect.facebook.net/en_US/fbds.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(fbds, s);
-                _fbq.loaded = true;
-            }
-            _fbq.push(['addPixelId', '1751139638494665']);
-        })();
-        window._fbq = window._fbq || [];
-        window._fbq.push(['track', 'PixelInitialized', {}]);
+    <script src="<?php echo SITE_DIR; ?>js/common/common.js"></script>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '327972760869811');
+        fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=1751139638494665&amp;ev=PixelInitialized" /></noscript>
-
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=327972760869811&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- DO NOT MODIFY -->
+    <!-- End Facebook Pixel Code -->
 
 
 
@@ -74,10 +72,38 @@
                 <div class="countbox"></div>
             </div>
             <div class="attention">Оมีสินค้าเหลือทั้งหมด15 ชิ้น</div>
-            <div class="center"><a href="/checkout/?product_id=<?php echo $product['id']; ?>" class="button-m"></a></div>
+            <form id="form1" method="post" action="<?php echo SITE_DIR; ?>checkout/success/">
+                <h1 style="text-align: center">ฝากคำ ถามหรือคำ ขอ</h1>
+                <h3 style="text-align: center">เราจะติดต่อคุณเพื่อชี้แจงรายละเอียดใน
+                    การสั่งซื้อ</h3><br><br>
+                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                <input class="super_input" name="user[email]" type="email" data-require="1" placeholder="อีเมล์">
+                <div class="validate-message error-require">
+                    ฟิลด์ที่จำเป็น
+                </div>
+                <br><br>
+                <input class="super_input" name="user[phone]" type="tel" data-require="1" placeholder="หมายเลขโทรศัพท์">
+                <div class="validate-message error-require">
+                    ฟิลด์ที่จำเป็น
+                </div>
+                <br><br>
+                <div class="center"><button name="order_btn" type="submit" href="/checkout/?product_id=<?php echo $product['id']; ?>" class="button-m"></button t></div>
+            </form>
         </div>
     </div>
 
+    <style>
+        .block-1 form input {
+            margin-bottom: 10px;
+        }
+        .super_input {
+            /*border: 1px solid #a8d82e;*/
+            /*display: block;*/
+
+            /*height: 35px;*/
+            /*border-radius: 30px;*/
+        }
+    </style>
     <div class="section block-2">
         <h2><b>การันตีผลลัพธ์ที่เยี่ยมยอดและรวดเร็วเห็
 
@@ -247,10 +273,27 @@
                     <strong>ฝากคำ ถามหรือคำ ขอ</strong><br/>
                     คุณมีเวลาที่จะได้ซื้อพร้อมส่วนลด!<br/>
                 </p>
-                <form action="checkout/?product_id=<?php echo $product['id']; ?>" method="post" onsubmit="">
-
-                    <div><button></button></div>
+                <form id="form2" method="post" action="<?php echo SITE_DIR; ?>checkout/success/">
+                    <h1 style="text-align: center">ฝากคำ ถามหรือคำ ขอ</h1>
+                    <h3 style="text-align: center">เราจะติดต่อคุณเพื่อชี้แจงรายละเอียดใน
+                        การสั่งซื้อ</h3>
+                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                    <input class="super_input" name="user[email]" type="email" data-require="1" placeholder="อีเมล์">
+                    <div class="validate-message error-require">
+                        ฟิลด์ที่จำเป็น
+                    </div>
+                    <br>
+                    <input class="super_input" name="user[phone]" type="tel" data-require="1" placeholder="หมายเลขโทรศัพท์">
+                    <div class="validate-message error-require">
+                        ฟิลด์ที่จำเป็น
+                    </div>
+                    <br>
+                    <div class="center"><button type="submit" name="order_btn" href="/checkout/?product_id=<?php echo $product['id']; ?>" class="button-m"></button t></div>
                 </form>
+<!--                <form action="checkout/?product_id=--><?php //echo $product['id']; ?><!--" method="post" onsubmit="">-->
+<!---->
+<!--                    <div><button></button></div>-->
+<!--                </form>-->
             </div>
         </div>
     </div>
@@ -258,8 +301,27 @@
 
     </div>
 </div>
+<style>
+    .error-require {
+        color: red;
+        font-size: 20px;
+        margin: 10px;
+        display: none;
+        text-align: center;;
+    }
+</style>
+<script type="text/javascript">
+    $ = jQuery.noConflict();
+    $(document).ready(function () {
+        $("#form1").submit(function() {
+            return validate('form1');
+        });
 
-
+        $("#form2").submit(function() {
+            return validate('form2');
+        });
+    });
+</script>
 
 </body>
 </html>
