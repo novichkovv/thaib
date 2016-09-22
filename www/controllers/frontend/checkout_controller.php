@@ -204,6 +204,31 @@ class checkout_controller extends controller
 
     public function success()
     {
+        if(isset($_POST['order_btn'])) {
+            $product = $this->model('products')->getById($_POST['product_id']);
+            if(!$product) {
+                throw new Exception('Incorrect Product');
+            }
+            $user = $_POST['user'];
+            if($tmp = $this->model('users')->getByFields($user)) {
+                $user = $tmp;
+            } else {
+                $user['create_date'] = date('Y-m-d H:i:s');
+                $user['id'] = $this->model('users')->insert($user);
+            }
+            if(!$user['id']) {
+                throw new Exception('No user created');
+            }
+            $order = [];
+            $order['user_id'] = $user['id'];
+            $order['product_id'] = $product['id'];
+            $order['price'] = $product['price'];
+            $order['status_id'] = 1;
+            $order['create_date'] = date('Y-m-d H:i:s');
+            if(!$this->model('orders')->insert($order)) {
+                throw new Exception('No order created');
+            }
+        }
         $this->view('payment' . DS . 'success');
     }
 

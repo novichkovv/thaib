@@ -7,7 +7,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT_DIR', realpath($_SERVER['DOCUMENT_ROOT']) . DS);
 define('CORE_DIR', ROOT_DIR . 'core' . DS);
-define('SITE_DIR', 'http://' . str_replace('http://', '', $_SERVER['HTTP_HOST'] . '/'));
+
 if(count($arr = explode('.', $_SERVER['HTTP_HOST'])) > 2) {
     $sub_domain = array_shift($arr);
     $project = in_array($sub_domain, array(
@@ -20,6 +20,11 @@ if(count($arr = explode('.', $_SERVER['HTTP_HOST'])) > 2) {
 
 } else {
     $project = 'frontend';
+}
+if($project == 'frontend') {
+    define('SITE_DIR', 'https://' . str_replace('https://', '', $_SERVER['HTTP_HOST'] . '/'));
+} else {
+    define('SITE_DIR', 'http://' . str_replace('http://', '', $_SERVER['HTTP_HOST'] . '/'));
 }
 define('MAIN_SITE_DIR', 'http://' . str_replace('http://', '', implode('.', $arr) . '/'));
 define('PROJECT', $project);

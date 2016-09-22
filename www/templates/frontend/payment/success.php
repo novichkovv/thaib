@@ -69,14 +69,15 @@
     padding-bottom: 15px;
     padding-top: 13px;
     padding-left: 30px;
-    padding-right: 30px;">ประสบความสำเร็จในการชำระเงิน</div>
+    padding-right: 30px;">
+                        คำขอของคุณได้รับการส่ง</div>
                     <br><br><br>
                     <div id="account_info">
                         <h4 style="font-size: 30px;" class="text-center">
                             ขอแสดงความยินดี!
                         </h4>
                         <div class="text-center" style="font-size: 20px;">
-                            สั่งซื้อของคุณจะถูกจัดส่งในเวลาประมาณ 5-10 วัน
+                            ผู้ประกอบการจะได้รับในการติดต่อกับคุณในไม่ช้า
                         </div>
                     </div>
 
