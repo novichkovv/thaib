@@ -9,6 +9,7 @@ class index_controller extends controller
 {
     public function index()
     {
+        header('Location: ' . SITE_DIR . 'mask/');
 //        $api = new paypal_api_class();
 //        $params = json_decode('{
 //          "intent":"sale",

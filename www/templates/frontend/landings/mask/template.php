@@ -77,12 +77,12 @@
                 <h3 style="text-align: center">เราจะติดต่อคุณเพื่อชี้แจงรายละเอียดใน
                     การสั่งซื้อ</h3><br><br>
                 <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                <input class="super_input" name="user[email]" type="email" data-require="1" placeholder="อีเมล์">
+                <input class="super_input" name="user[user_name]" type="text" data-require="1" placeholder="กรอกชื่อของคุณ">
                 <div class="validate-message error-require">
                     ฟิลด์ที่จำเป็น
                 </div>
                 <br><br>
-                <input class="super_input" name="user[phone]" type="tel" data-require="1" placeholder="หมายเลขโทรศัพท์">
+                <input class="super_input" name="user[phone]" type="tel" data-require="1" placeholder="กรอกเบอร์โทรศัพท์">
                 <div class="validate-message error-require">
                     ฟิลด์ที่จำเป็น
                 </div>
@@ -278,12 +278,12 @@
                     <h3 style="text-align: center">เราจะติดต่อคุณเพื่อชี้แจงรายละเอียดใน
                         การสั่งซื้อ</h3>
                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                    <input class="super_input" name="user[email]" type="email" data-require="1" placeholder="อีเมล์">
+                    <input class="super_input" name="user[user_name]" type="text" data-require="1" placeholder="กรอกชื่อของคุณ">
                     <div class="validate-message error-require">
                         ฟิลด์ที่จำเป็น
                     </div>
                     <br>
-                    <input class="super_input" name="user[phone]" type="tel" data-require="1" placeholder="หมายเลขโทรศัพท์">
+                    <input class="super_input" name="user[phone]" type="tel" data-require="1" placeholder="กรอกเบอร์โทรศัพท์">
                     <div class="validate-message error-require">
                         ฟิลด์ที่จำเป็น
                     </div>
