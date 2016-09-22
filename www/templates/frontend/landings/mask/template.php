@@ -74,7 +74,7 @@
                 <div class="countbox"></div>
             </div>
             <div class="attention">Оมีสินค้าเหลือทั้งหมด15 ชิ้น</div>
-            <div class="center"><a href="/checkout/?product_id=1" class="button-m"></a></div>
+            <div class="center"><a href="/checkout/?product_id=<?php echo $product['id']; ?>" class="button-m"></a></div>
         </div>
     </div>
 
@@ -247,7 +247,7 @@
                     <strong>ฝากคำ ถามหรือคำ ขอ</strong><br/>
                     คุณมีเวลาที่จะได้ซื้อพร้อมส่วนลด!<br/>
                 </p>
-                <form action="checkout/?product_id=1" method="post" onsubmit="">
+                <form action="checkout/?product_id=<?php echo $product['id']; ?>" method="post" onsubmit="">
 
                     <div><button></button></div>
                 </form>
