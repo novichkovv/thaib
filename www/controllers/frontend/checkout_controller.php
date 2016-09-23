@@ -225,9 +225,15 @@ class checkout_controller extends controller
             $order['price'] = $product['price'];
             $order['status_id'] = 1;
             $order['create_date'] = date('Y-m-d H:i:s');
-            if(!$this->model('orders')->insert($order)) {
+            if(!$order['id'] = $this->model('orders')->insert($order)) {
                 throw new Exception('No order created');
             }
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=utf8' . "\r\n";
+            $headers .= 'From: Thaibeauty Order <admin@thaibeauty.pro>' . "\r\n";
+            $headers .= 'Reply-To: admin@thaibeauty.pro' . "\r\n";
+            $message = 'Поступил Заказ № ' . $order['id'];
+            mail('novichkovv@bk.ru', 'Поступил Заказ', $message, $headers);
         }
         $this->view('payment' . DS . 'success');
     }
