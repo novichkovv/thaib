@@ -24,12 +24,26 @@ class orders_controller extends controller
                     'o.status_id',
                     'o.create_date',
                     'o.pay_date',
-                    '1'
+                    'CONCAT("
+                    <a data-toggle=\"modal\" class=\"btn outline blue show_order\" href=\"#order_modal\" data-id=\"", o.id, "\">
+                        <i class=\"fa fa-search\"></i>
+                    </a>")'
                 ];
                 $params['join']['products p'] = [
                     'on' => 'p.id = o.product_id',
                 ];
                 echo json_encode($this->getDataTable($params));
+                exit;
+                break;
+
+            case "get_order_modal_form":
+                $order = $this->model('orders')->getById($_POST['id']);
+                $this->render('order', $order);
+                $this->render('product', $this->model('products')->getById($order['product_id']));
+                $this->render('user', $this->model('users')->getById($order['user_id']));
+                $this->render('address', $this->model('user_addresses')->getById($order['address_id']));
+                $template = $this->fetch('orders' . DS . 'ajax' . DS . 'order_modal');
+                echo json_encode(array('status' => 1, 'template' => $template));
                 exit;
                 break;
         }

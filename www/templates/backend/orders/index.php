@@ -37,23 +37,10 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="delete_user_modal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Удалить Сотрудника</h4>
-            </div>
-            <div class="modal-body">
-                <p>Вы уверены?</p>
-            </div>
-            <div class="modal-footer">
-                <form action="" method="post">
-                    <input name="delete_id" id="delete_input" type="hidden" value="">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
-                    <button type="submit" name="delete_btn" class="btn btn-primary">Удалить</button>
-                </form>
-            </div>
+<div class="modal fade" id="order_modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="order_modal_container">
+
         </div>
     </div>
 </div>
@@ -61,10 +48,23 @@
     $ = jQuery.noConflict();
     $(document).ready(function() {
         ajax_datatable('get_orders');
-        $("body").on("click", ".delete_user", function()
-        {
+        $("body").on("click", ".show_order", function () {
             var id = $(this).attr('data-id');
-            $("#delete_input").val(id);
+            var params = {
+                'action': 'get_order_modal_form',
+                'values': {id: id},
+                'callback': function (msg) {
+                    ajax_respond(msg,
+                        function (respond) { //success
+//                            Notifier.success('Информация сохранена');
+                            $("#order_modal_container").html(respond.template);
+                        },
+                        function (respond) { //fail
+                        }
+                    );
+                }
+            };
+            ajax(params);
         });
     });
 </script>
