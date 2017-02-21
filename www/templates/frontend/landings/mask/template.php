@@ -76,6 +76,7 @@
                 <h1 style="text-align: center">ฝากคำ ถามหรือคำ ขอ</h1>
                 <h3 style="text-align: center">เราจะติดต่อคุณเพื่อชี้แจงรายละเอียดใน
                     การสั่งซื้อ</h3><br><br>
+                <input type="hidden" name="pixel" value="<?php echo $_GET['pixel']; ?>">
                 <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                 <input class="super_input" name="user[user_name]" type="text" data-require="1" placeholder="กรอกชื่อของคุณ">
                 <div class="validate-message error-require">
