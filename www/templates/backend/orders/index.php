@@ -56,7 +56,6 @@
                 'callback': function (msg) {
                     ajax_respond(msg,
                         function (respond) { //success
-//                            Notifier.success('Информация сохранена');
                             $("#order_modal_container").html(respond.template);
                         },
                         function (respond) { //fail
@@ -65,6 +64,25 @@
                 }
             };
             ajax(params);
+        });
+
+        $("body").on("submit", "#order_modal_form", function () {
+            var params = {
+                'action': 'edit_order_info',
+                'get_from_form': 'order_modal_form',
+                'callback': function (msg) {
+                    ajax_respond(msg,
+                        function (respond) { //success
+                            $('#order_modal').modal('hide');
+                            Notifier.success('Информация о заказе сохранена');
+                        },
+                        function (respond) { //fail
+                        }
+                    );
+                }
+            };
+            ajax(params);
+            return false;
         });
     });
 </script>

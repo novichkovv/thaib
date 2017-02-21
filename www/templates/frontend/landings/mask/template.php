@@ -25,11 +25,11 @@
             n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
             t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
             document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '327972760869811');
+        fbq('init', '<?php echo $_GET['pixel']; ?>');
         fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=327972760869811&ev=PageView&noscript=1"
+                   src="https://www.facebook.com/tr?id=<?php echo $_GET['pixel']; ?>&ev=PageView&noscript=1"
         /></noscript>
     <!-- DO NOT MODIFY -->
     <!-- End Facebook Pixel Code -->
@@ -274,10 +274,12 @@
                     คุณมีเวลาที่จะได้ซื้อพร้อมส่วนลด!<br/>
                 </p>
                 <form id="form2" method="post" action="<?php echo SITE_DIR; ?>checkout/success/">
+
                     <h1 style="text-align: center">ฝากคำ ถามหรือคำ ขอ</h1>
                     <h3 style="text-align: center">เราจะติดต่อคุณเพื่อชี้แจงรายละเอียดใน
                         การสั่งซื้อ</h3>
                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                    <input type="hidden" name="pixel" value="<?php echo $_GET['pixel']; ?>">
                     <input class="super_input" name="user[user_name]" type="text" data-require="1" placeholder="กรอกชื่อของคุณ">
                     <div class="validate-message error-require">
                         ฟิลด์ที่จำเป็น

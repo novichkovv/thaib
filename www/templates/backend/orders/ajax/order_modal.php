@@ -17,13 +17,13 @@
                 <div class="form-group">
                     <label class="control-label col-md-4">Дата Заказа</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="order[create_date]" value="<?php echo $order['create_date']; ?>" disabled>
+                        <input type="text" class="form-control" value="<?php echo $order['create_date']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-4">Название Продукта</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="order[create_date]" value="<?php echo $product['product_name']; ?>" disabled>
+                        <input type="text" class="form-control" value="<?php echo $product['product_name']; ?>" disabled>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Сохранить изменения</button>
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
     </div>
+    <input type="hidden" name="order[id]" value="<?php echo $order['id']; ?>">
+    <input type="hidden" name="user[id]" value="<?php echo $user['id']; ?>">
+    <input type="hidden" name="address[id]" value="<?php echo $address['id']; ?>">
 </form>

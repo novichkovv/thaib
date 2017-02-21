@@ -204,6 +204,7 @@ class checkout_controller extends controller
 
     public function success()
     {
+        $this->render('pixel', $_POST['pixel']);
         if(isset($_POST['order_btn'])) {
             $product = $this->model('products')->getById($_POST['product_id']);
             if(!$product) {
@@ -233,7 +234,7 @@ class checkout_controller extends controller
             $headers .= 'From: Thaibeauty Order <admin@thaibeauty.pro>' . "\r\n";
             $headers .= 'Reply-To: admin@thaibeauty.pro' . "\r\n";
             $message = 'Поступил Заказ № ' . $order['id'];
-            mail('novichkovv@bk.ru', 'Поступил Заказ', $message, $headers);
+//            mail('novichkovv@bk.ru', 'Поступил Заказ', $message, $headers);
         }
         $this->view('payment' . DS . 'success');
     }

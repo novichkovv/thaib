@@ -46,6 +46,20 @@ class orders_controller extends controller
                 echo json_encode(array('status' => 1, 'template' => $template));
                 exit;
                 break;
+
+            case "edit_order_info":
+                $address = $_POST['address'];
+                if(!$address['id']) {
+                    $address['user_id'] = $_POST['user']['id'];
+                }
+                $address['id'] = $this->model('user_addresses')->insert($_POST['address']);
+                $order['address_id'] = $address['id'];
+                $this->model('users')->insert($_POST['user']);
+                $this->model('orders')->insert($order);
+                echo json_encode(array('status' => 1));
+                exit;
+                break;
+
         }
     }
 }
