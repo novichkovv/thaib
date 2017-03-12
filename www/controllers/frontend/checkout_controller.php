@@ -205,7 +205,7 @@ class checkout_controller extends controller
     public function success()
     {
         $this->render('pixel', $_POST['pixel']);
-        if(isset($_POST['order_btn'])) {
+        if(isset($_POST['user'])) {
             $product = $this->model('products')->getById($_POST['product_id']);
             if(!$product) {
                 throw new Exception('Incorrect Product');

@@ -65,9 +65,9 @@ class payment_controller extends controller
                 header('Location: ' . SITE_DIR . 'payment/success/?order_id=' . $_POST['order_id']);
                 exit;
             } else {
-                if($res['name'] = 'VALIDATION_ERROR') {
-                    $this->
-                }
+//                if($res['name'] = 'VALIDATION_ERROR') {
+//                    $this->
+//                }
                 print_r($res);
             }
             exit;
