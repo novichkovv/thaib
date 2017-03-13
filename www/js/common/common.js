@@ -2,6 +2,16 @@
  * Created by asus1 on 29.08.2015.
  */
 
+
+// $ = jQuery.noConflict();
+// $(document).ready(function() {
+//     $()
+// });
+
+
+
+
+
 /**
  *
  * @param params

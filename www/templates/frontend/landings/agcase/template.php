@@ -122,9 +122,16 @@
                             <strong>ทำการร้องขอ</strong><br>
                             แล้วเราจะติดต่อคุณเพื่อหารือเกี่ยวกับรายละเอียดการสั่งซื้อของคุณ
                         </p>
-                        <form action="<?php echo SITE_DIR; ?>checkout/success/" method="post" class="m1_form">
-                            <div><input type="text" name="user[user_name]" placeholder="ชื่อของคุณ" required=""></div>
-                            <div><input type="text" id="phone" name="user[phone]" placeholder="หมายเลขโทรศัพท์ของคุณ" required=""></div>
+                        <form action="<?php echo SITE_DIR; ?>checkout/success/" id="main_form" method="post" class="m1_form">
+                            <div>
+                                <input type="text" name="user[user_name]" placeholder="ชื่อของคุณ" data-require="1">
+                                <div class="error-require validate-message">ฟิลด์ที่ต้องระบุ</div>
+                            </div>
+                            <div>
+                                <input type="text" id="phone" name="user[phone]" placeholder="หมายเลขโทรศัพท์ของคุณ" data-require="1">
+                                <div class="error-require validate-message">ฟิลด์ที่ต้องระบุ</div>
+<!--                                <div class="error-validate validate-message">ฟิลด์ที่ต้องระบุ</div>-->
+                            </div>
                             <input type="hidden" name="visitor_id" value="<?php echo $visitor_id; ?>"/>
                             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>"/>
                             <input type="hidden" name="s" value="<?php echo $_GET['s']; ?>">
@@ -141,12 +148,24 @@
         <script type="text/javascript">
             $ = jQuery.noConflict();
             $(document).ready(function () {
-                $("#phone").focus(function() {
+                var $phone = $("#phone");
+                $("#main_form").submit(function () {
+                    var res = validate('main_form');
+//                    if($phone.val() == '+66') {
+//                        res = false;
+//                    }
+                    if(res === true) {
+                        $(".button-m").prop('disabled', true);
+                    }
+                    return res;
+                });
+
+                $phone.focus(function() {
                     if ($(this).val() == '') {
                         $(this).val('+66');
                     }
                 });
-                $("#phone").mask("+669999999999");
+                $phone.mask("+669999999999");
             });
         </script>
     </body>

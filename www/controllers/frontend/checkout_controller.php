@@ -235,6 +235,8 @@ class checkout_controller extends controller
             $headers .= 'Reply-To: admin@thaibeauty.pro' . "\r\n";
             $message = 'Поступил Заказ № ' . $order['id'];
 //            mail('novichkovv@bk.ru', 'Поступил Заказ', $message, $headers);
+            header('Location: ' . SITE_DIR . 'checkout/success/?id=' . $order['id']);
+            exit;
         }
         $this->view('payment' . DS . 'success');
     }

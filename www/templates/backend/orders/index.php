@@ -2,7 +2,7 @@
     <small></small>
 </h3>
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption font-dark">
@@ -23,9 +23,9 @@
                     <tr>
                         <th>#</th>
                         <th>Продукт</th>
-                        <th>Статус</th>
+                        <th>Имя</th>
+                        <th>Телефон</th>
                         <th>Дата Создания</th>
-                        <th>Дата Оплаты</th>
                         <th></th>
                     </tr>
                     </thead>

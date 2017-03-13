@@ -21,9 +21,10 @@ class orders_controller extends controller
                 $params['select'] = [
                     'o.id',
                     'p.product_name',
-                    'o.status_id',
+                    'u.user_name',
+                    'u.phone',
                     'o.create_date',
-                    'o.pay_date',
+//                    'o.pay_date',
                     'CONCAT("
                     <a data-toggle=\"modal\" class=\"btn outline blue show_order\" href=\"#order_modal\" data-id=\"", o.id, "\">
                         <i class=\"fa fa-search\"></i>
@@ -32,6 +33,10 @@ class orders_controller extends controller
                 $params['join']['products p'] = [
                     'on' => 'p.id = o.product_id',
                 ];
+                $params['join']['users u'] = [
+                    'on' => 'u.id = o.user_id',
+                ];
+                $params['order'] = 'create_date DESC';
                 echo json_encode($this->getDataTable($params));
                 exit;
                 break;
